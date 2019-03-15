@@ -97,10 +97,10 @@ class CustomHandler(http_server.SimpleHTTPRequestHandler):
             refresh_time = int(form.getvalue("time"))
             if refresh_time > 0:
                 printc("<green>Refreshing the view of uLogMe<reset>, for the day '<magenta>{}<reset>' ...".format(ppDay(refresh_time)))
-                notify("Refreshing the view of <b>uLogMe</b>, for the day '<i>{}</i>' ...".format(ppDay(refresh_time)))
+                # notify("Refreshing the view of <b>uLogMe</b>, for the day '<i>{}</i>' ...".format(ppDay(refresh_time)))
             else:
                 printc("<green>Refreshing the view of uLogMe<reset>, for the overview page ...")
-                notify("Refreshing the view of <b>uLogMe</b>, for the overview page ...")
+                # notify("Refreshing the view of <b>uLogMe</b>, for the overview page ...")
             # FIXME add a command line option to enable/disable the refresh notifications
             os.chdir(self.rootdir)  # pop out
             updateEvents()  # defined in export_events.py
