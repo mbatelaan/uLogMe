@@ -12,7 +12,7 @@ readonly LANGUAGE=en
 readonly LANG=en_US.utf8
 
 # logs the active window titles over time. Logs are written
-# in ../logs/window_X.txt, where X is unix timestamp of 7am of the
+# in ../logs/window_X.txt, where X is unix timestamp of 4am of the
 # recording day. The logs are written if a window change event occurs
 # (with 2 second frequency check time), or every 10 minutes if
 # no changes occur.
@@ -153,12 +153,12 @@ do
 
 	# log window switch if appropriate
 	if [ "$perform_write" = true ] && [ -n "$curtitle"  ]; then
-        # Get rewind time, day starts at 7am and ends at 6:59am next day
-        rewind7am=$(python3 ./rewind7am.py)
+        # Get rewind time, day starts at 4am and ends at 6:59am next day
+        rewind4am=$(python3 ./rewind4am.py)
         # One logfile daily
-        log_file="../logs/window_${rewind7am}.txt"
-        # If computer was just awaken, log suspend event unless it happened before 7am
-        if [ $was_awaken = true ] && [ "${suspended_at:-0}" -ge "$rewind7am" ]; then
+        log_file="../logs/window_${rewind4am}.txt"
+        # If computer was just awaken, log suspend event unless it happened before 4am
+        if [ $was_awaken = true ] && [ "${suspended_at:-0}" -ge "$rewind4am" ]; then
             echo "$suspended_at __SUSPEND" >> "$log_file"
 		fi
 		echo "$T $curtitle" >> "$log_file"

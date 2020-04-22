@@ -77,9 +77,9 @@ if __name__ == "__main__":
     notes_file = os.path.join(ROOT, "..", "logs", "notes.txt")
     nevents = loadEvents(notes_file)
 
-    # rewind time to 7am on earliest data collection day
+    # rewind time to 4am on earliest data collection day
     dfirst = datetime.datetime.fromtimestamp(mint)
-    dfirst = datetime.datetime(dfirst.year, dfirst.month, dfirst.day, 7)  # set hour to 7am
+    dfirst = datetime.datetime(dfirst.year, dfirst.month, dfirst.day, 4)  # set hour to 4am
     curtime = int(dfirst.strftime("%s"))
     out_list = []
 

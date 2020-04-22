@@ -3,7 +3,7 @@
 # MIT Licensed, https://lbesson.mit-license.org/
 #
 # Logs the key press frequency over 10 second window.
-# Logs are written in ../logs/keyfreq_X.txt every 10 seconds, where X is unix timestamp of 7am of the recording day.
+# Logs are written in ../logs/keyfreq_X.txt every 10 seconds, where X is unix timestamp of 4am of the recording day.
 
 set -o nounset  # Stricter mode
 
@@ -66,7 +66,7 @@ while true; do
     num=$(cat $filesToGrep | wc -l)
 
     # Append unix time stamp and the number into file
-    log_file="../logs/keyfreq_$(python3 rewind7am.py).txt"
+    log_file="../logs/keyfreq_$(python3 rewind4am.py).txt"
     # Only print and log if $num > 0
     if [ "${num:-0}" -gt 0 ]; then
         echo -e "Logged ${yellow}key frequency${reset}: \tat ${magenta}$(date)${reset}, ${green}$(printf "%5i " "${num}")${reset} key release events, written to '${black}${log_file}${reset}'"

@@ -43,7 +43,7 @@ except ImportError:
 
 # Local imports
 from export_events import updateEvents
-from rewind7am import rewindTime, ppDay, ppTime
+from rewind4am import rewindTime, ppDay, ppTime
 from notify import notify
 
 

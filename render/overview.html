@@ -220,15 +220,15 @@
       for(var k=0;k<events.length;k++) {
         var es = events[k]["keyfreq_events"]; // window events for day k
 
-        // get 7am time on this day
+        // get 4am time on this day
         var d0 = new Date(es[0].t * 1000);
-        d0.setHours(7);
+        d0.setHours(4);
         d0.setMinutes(0);
         d0.setSeconds(0);
         d0.setMilliseconds(0);
 
-        var t00 = d0.getTime() / 1000; // morning at 7am
-        var ft = t00 + 60*60*24; // 7am the next day
+        var t00 = d0.getTime() / 1000; // morning at 4am
+        var ft = t00 + 60*60*24; // 4am the next day
         var kevents = [];
         var t = t00;
         while(t <= ft) {
@@ -283,7 +283,7 @@
         .attr("font-size", 14)
         .attr("font-family", "arial")
         .attr("transform", "translate(" + (q/24*(W-2*wmargin)+2+wmargin) + ",16)")
-        .text(function(d, i) { return ((q + 7) % 24) + ":00"; });
+        .text(function(d, i) { return ((q + 4) % 24) + ":00"; });
 
         svg.append("line")
         .attr("x1", q/24*(W-2*wmargin)+wmargin)
@@ -337,7 +337,7 @@
           .attr("fill", "rgb(255, 100, 100)");
 
         svg.append("text")
-          .attr("transform", "translate(" + (W - wmargin + 7) + ", " + 13 + ")")
+          .attr("transform", "translate(" + (W - wmargin + 4) + ", " + 13 + ")")
           .attr("font-size", 14)
           .attr("font-family", "arial")
           .text(ktots[k]);
