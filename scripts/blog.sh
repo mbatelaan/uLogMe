@@ -23,13 +23,14 @@ cd "$( dirname "${BASH_SOURCE[0]}" )"
 # echo -e "Logged ${yellow}blog${reset}: ${magenta}$T${reset} ${green}$n${reset} into '${black}$logfile${reset}'"
 
 logfile="$1"
+CP "$logfile" /tmp/
 # time="$2"
 time="$(date "+%A %d %B %Y")"
 
 # TODO: grep for lines 'TODO' and append them in ~/TODO.md with ## date, if ## date not present and if line not present
 todos="${HOME:-~}/TODO.md"
 header_line="## TODO: $time #uLogMe"
-if ( grep "$header_line" "$todos" &>/dev/null); then
+if ( grep -- "$header_line" "$todos" &>/dev/null); then
     echo -e "'${black}${header_line}${reset}' ${white}already in ${u}${todos}${reset}${white}"
 else
     echo -e "${green}Adding '${white}${header_line}${reset}' to ${u}${todos}${reset}${white}"
@@ -41,11 +42,13 @@ while IFS= read -r line; do
     todo_line="$(echo "${line}" | grep 'TODO')"
     if [ "X${todo_line}" != "X" ]; then
         echo -e "${blue}Found TODO line:${white} ${line}${white}"  # DEBUG
-        if ( grep "${todo_line}" "${todos}" &>/dev/null ); then
+        if ( grep -- "${todo_line}" "${todos}" &>/dev/null ); then
             echo -e "${red}Not a new todo_line...${white}"  # DEBUG
         else
             echo -e "${green}Found new todo_line:${white} ${todo_line}${white}"  # DEBUG
-            echo "$todo_line" | sed 's/^  //' >> "$todos"
+            # first, remove 2 leading spaces
+            # then, transform "- TODO" into "- [ ] TODO" so I can mark them as done in VSCode, using Alt+D
+            echo "$todo_line" | sed 's/^  //' | sed 's/- TODO/- [ ] TODO/' >> "$todos"
         fi
     fi
 done < "$logfile"
