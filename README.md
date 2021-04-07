@@ -15,6 +15,8 @@ Current features:
 The project currently **only works on Ubuntu** or Debian-like Linux (for an OSX version, see [the original project](https://github.com/karpathy/ulogme)).
 It uses the new fancy [`Promises`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) feature of ECMAScript 6. This might not be implemented in all browsers, but recent one should have it (recent Chrome and Firefox are fine, at least).
 
+> *Other self-quantified projects?* I've been using cloud-based [WakaTime.com](https://WakaTime.com/) since 2015 (see [blog post](https://perso.crans.org/besson/wakatime.en.html), and locally-hosted [ActivityWatch](https://ActivityWatch.net) since 2021, but still use uLogMe everyday.
+
 ## Screenshots
 ### "Daily view" page
 ![Demo - Daily view](screenshots/demo_daily1.png)
