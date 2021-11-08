@@ -63,6 +63,16 @@ def writenote(note, time_=None):
     notify("<b>uLogMe</b> created a note, with content '<i>{}</i>' and time '<i>{!s}</i>'.".format(note, time_))
     printc("<green>uLogMe created a note<reset>, with content '<black>{}<reset>' and time '<magenta>{!s}<reset>'.".format(note, time_))
 
+def writeblog(name_f, time_=None):
+    """ From https://github.com/karpathy/ulogme/issues/48"""
+    cmd = ["../scripts/blog.sh", name_f]
+    if time_ is not None:
+        cmd.append(str(time_))
+    process = subprocess.Popen(cmd, stdin=subprocess.PIPE)
+    process.wait()
+    notify("<b>uLogMe</b> created a blog, on file {}, and time '<i>{!s}</i>'.".format(name_f, time_))
+    printc("<green>uLogMe created a blog<reset>, on file {} and time '<magenta>{!s}<reset>'.".format(name_f, time_))
+
 
 # Custom handler
 class CustomHandler(http_server.SimpleHTTPRequestHandler):
@@ -130,8 +140,12 @@ class CustomHandler(http_server.SimpleHTTPRequestHandler):
             os.chdir(self.rootdir)  # pop out
             # trev = rewindTime(post_time)
             # print("trev =", trev)  # DEBUG
-            with open(os.path.join("..", "logs", "blog_%d.txt" % (post_time, )), "w") as f:
+            # FIXED no need for these python lines, if the blog.sh script writes the note itself
+            name_f = os.path.join("..", "logs", "blog_%d.txt" % (post_time, ))
+            with open(name_f, "w") as f:
                 f.write(post)
+            # TODO: grep for lines 'TODO' and append them in ~/TODO.md with ## date, if ## date not present and if line not present
+            writeblog(name_f, time_=post_time)
             updateEvents()  # defined in export_events.py
             os.chdir(os.path.join("..", "render"))  # go back to render
             result = "OK"

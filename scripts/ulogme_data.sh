@@ -12,5 +12,10 @@ echo "WARNING If you don't see colors correctly, remove the 'color.sh' file in '
 
 cd "$( dirname "${BASH_SOURCE[0]}" )"
 
+echo "Starting ./keyfreq.sh to log keys..."
 ./keyfreq.sh &
+echo "Okay, we have started ./keyfreq.sh to log keys..."
+
+echo "Starting ./logactivewin.sh to log keys..."
 ./logactivewin.sh
+# echo "Okay, we have started ./logactivewin.sh to log keys..."
