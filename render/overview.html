@@ -264,10 +264,10 @@
       var div = d3.select("#keystats").append("div");
       var svg = div.append("svg")
         .attr("width", W)
-        .attr("height", H*2);
+        .attr("height", H*6);
       var line = d3.svg.line()
         .x(function(d,i) { return (W - 2*wmargin) * i / sx + wmargin; })
-        .y(function(d) { return 2*H - d / max_kevents_global * H * 2; });
+        .y(function(d) { return 6*H - d / max_kevents_global * H * 6; });
       svg.append("path")
         .datum(kevents_global)
         .attr("class", "line")
@@ -284,6 +284,11 @@
         .attr("font-family", "arial")
         .attr("transform", "translate(" + (q/24*(W-2*wmargin)+2+wmargin) + ",16)")
         .text(function(d, i) { return ((q + 4) % 24) + ":00"; });
+        // svg.append("text")
+        // .attr("font-size", 14)
+        // .attr("font-family", "arial")
+        // .attr("transform", "translate(" + (q/24*(W-2*wmargin)+2+wmargin) + ",6)")
+        // .text(function(d, i) { return ((q + 4) % 24) + ":00"; });
 
         svg.append("line")
         .attr("x1", q/24*(W-2*wmargin)+wmargin)
@@ -342,6 +347,41 @@
           .attr("font-family", "arial")
           .text(ktots[k]);
       }
+
+      var svg = div.append("svg")
+        .attr("width", W)
+        .attr("height", 30);
+      for(var q=0;q<24;q++) {
+        svg.append("text")
+        .attr("font-size", 14)
+        .attr("font-family", "arial")
+        .attr("transform", "translate(" + (q/24*(W-2*wmargin)+2+wmargin) + ",16)")
+        .text(function(d, i) { return ((q + 4) % 24) + ":00"; });
+
+        svg.append("line")
+        .attr("x1", q/24*(W-2*wmargin)+wmargin)
+        .attr("x2", q/24*(W-2*wmargin)+wmargin)
+        .attr("y1", 0)
+        .attr("y2", 20)
+        .attr("stroke", "#000")
+        .attr("stroke-width", 2);
+
+      }
+      // draw global key events across all days as line
+      var sx = kevents_global.length;
+      var bar_width = (W - wmargin) / sx;
+      // var div = d3.select("#keystats").append("div");
+      var svg = div.append("svg")
+        .attr("width", W)
+        .attr("height", H*6);
+      var line = d3.svg.line()
+        .x(function(d,i) { return (W - 2*wmargin) * i / sx + wmargin; })
+        .y(function(d) { return 6*H - d / max_kevents_global * H * 6; });
+      svg.append("path")
+        .datum(kevents_global)
+        .attr("class", "line")
+        .attr("d", line);
+
 
       var kevents_global
       div.append("p").text("Total keys pressed: " + sum_kevents_global + " in " + events.length + " days (" + Math.floor(sum_kevents_global/events.length) + " per day average)");
@@ -529,7 +569,7 @@
     <div id="spinnerdiv" title="Wait for the data to be loaded..."></div>
     <div id="reloadbutton" title="Reload the data (override cache)">&#10226;</div>
     <div id="indexlink"><a href="index.html" title="Switch to the Single-day view page">Single-day View</a></div>
-    <h1><a title="Check-out my version of uLogMe on GitHub" href="https://github.com/Naereen/uLogMe/">uLogMe</a> by <a href="https://github.com/Naereen/">Naereen</a></h1>
+    <h1><a title="Check-out my version of uLogMe on GitHub" href="https://github.com/Naereen/uLogMe/">uLogMe</a></h1>
     <div id="wrap">
       <div id="graphopts">
       </div>
